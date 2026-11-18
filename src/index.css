@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+/* Design tokens — the whole palette lives here. */
+@theme {
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-bg: #0b0e14;
+  --color-surface: #11151d;
+  --color-surface-2: #171c26;
+  --color-border: #232a36;
+  --color-fg: #d6dde8;
+  --color-muted: #8b95a7;
+  --color-faint: #5c6677;
+
+  --color-accent: #7ee787; /* prompt green */
+  --color-accent-dim: #3fb950;
+  --color-key: #79c0ff; /* syntax: keys, commands */
+  --color-string: #a5d6ff; /* syntax: strings */
+  --color-keyword: #ff7b72; /* syntax: keywords */
+  --color-comment: #6e7681;
+  --color-warn: #e3b341;
+
+  --animate-blink: blink 1.1s steps(1) infinite;
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-bg font-mono text-fg antialiased;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  ::selection {
+    @apply bg-accent/25 text-fg;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
